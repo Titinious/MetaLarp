@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 660564439421668917, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: m_Name
-      value: FusionAvatarFromZip Variant
+      value: MyFusionAvatarFromZip Variant
       objectReference: {fileID: 0}
     - target: {fileID: 660564439421668918, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: m_RootOrder
@@ -56,6 +56,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+      propertyPath: loadByPlayerOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: _assets.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -65,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: _assets.Array.data[0].path
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: _assets.Array.data[1].path
@@ -73,11 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8337681765717695180, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: NetworkGuid.RawGuidValue.Array.data[0]
-      value: -7762888126705158046
+      value: -5453512442574874408
       objectReference: {fileID: 0}
     - target: {fileID: 8337681765717695180, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: NetworkGuid.RawGuidValue.Array.data[1]
-      value: -6612704793825243463
+      value: -7556943346692836183
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}

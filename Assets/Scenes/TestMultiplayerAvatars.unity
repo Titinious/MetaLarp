@@ -4706,7 +4706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatarPrefab: {fileID: 5532093549929323193, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
-  avatarTestPrefab: {fileID: 5358838080116168713, guid: 6238a4d860ae4494b90e868f06f43aa4, type: 3}
+  avatarTestPrefab: {fileID: 5358838080116168713, guid: d8d826d2533b51b4a9349f8810582097, type: 3}
   speakerPrefab: {fileID: 5778787533146860584, guid: 07a2361a3b8cc9d489e08169e73320e2, type: 3}
   spawnPoints:
   - {fileID: 1368531525}

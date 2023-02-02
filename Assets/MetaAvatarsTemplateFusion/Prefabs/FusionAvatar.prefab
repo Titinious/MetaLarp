@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,13 +54,18 @@ MonoBehaviour:
       manifestationFlags: 2
       viewFlags: 3
       subMeshInclusionFlags: 2047
+      highQualityFlags: 0
   _activeView: 1
   _activeManifestation: 2
   _activeSubMeshes: 2047
   _activeSubMeshesIncludeUntyped: 1
+  _activeHighQuality: 0
   _bodyTracking: {fileID: 0}
+  _facePoseBehavior: {fileID: 0}
+  _eyePoseBehavior: {fileID: 0}
   _lipSync: {fileID: 0}
   _criticalJointTypes: 
+  _useExperimentalFeatures: -1
   _debugDrawing:
     drawTrackingPose: 0
     drawBoneNames: 0
@@ -83,6 +89,9 @@ MonoBehaviour:
   OnDefaultAvatarLoadedEvent:
     m_PersistentCalls:
       m_Calls: []
+  OnFastLoadAvatarLoadedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   OnUserAvatarLoadedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -100,6 +109,12 @@ MonoBehaviour:
   streamLOD: 2
   _intervalToSendData: 0.04
   networkBehaviour: {fileID: 5532093549929323193}
+  testingWithoutCredentials: 0
+  _overridePostfix: 
+  _underscorePostfix: 1
+  _assets:
+  - source: 0
+    path: 0
 --- !u!114 &8337681765717695180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,3 +181,5 @@ MonoBehaviour:
     RotBlendStart: 0.1
     RotBlendEnd: 0.5
     RotTeleportRadians: 1.5
+  UseLegacySharedModeInterpolation: 0
+  TargetInterpolationDelay: 0.03
