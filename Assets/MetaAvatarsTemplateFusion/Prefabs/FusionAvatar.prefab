@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8337681765717695180}
   - component: {fileID: 5532093549929323193}
   - component: {fileID: 1889514063280769194}
+  - component: {fileID: -7877161175676733928}
   m_Layer: 0
   m_Name: FusionAvatar
   m_TagString: Untagged
@@ -109,7 +110,8 @@ MonoBehaviour:
   streamLOD: 2
   _intervalToSendData: 0.04
   networkBehaviour: {fileID: 5532093549929323193}
-  testingWithoutCredentials: 0
+  testingWithoutCredentials: 1
+  loadByPlayerOrder: 1
   _overridePostfix: 
   _underscorePostfix: 1
   _assets:
@@ -183,3 +185,15 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &-7877161175676733928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660564439421668917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1445ead93959fda4cab5a0bcd916a96b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
