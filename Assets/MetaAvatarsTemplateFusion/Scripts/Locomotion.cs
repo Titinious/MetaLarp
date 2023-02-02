@@ -195,11 +195,16 @@ namespace Chiligames.MetaAvatarsFusion
             if (movement != Vector2.zero)
             {
                 isMoving = true;
-                OVRRig.transform.position += (Vector3.ProjectOnPlane(centerEyeAnchor.forward, Vector3.up).normalized * movement.y) * Time.deltaTime * continuousMovementSpeed;
-                OVRRig.transform.position += (Vector3.ProjectOnPlane(centerEyeAnchor.right, Vector3.up).normalized * movement.x) * Time.deltaTime * continuousMovementSpeed;
+                //OVRRig.transform.position += (Vector3.ProjectOnPlane(centerEyeAnchor.forward, Vector3.up).normalized * movement.y) * Time.deltaTime * continuousMovementSpeed;
+                //OVRRig.transform.position += (Vector3.ProjectOnPlane(centerEyeAnchor.right, Vector3.up).normalized * movement.x) * Time.deltaTime * continuousMovementSpeed;
 
-                bodyCollider.height = centerEyeAnchor.position.y;
-                bodyCollider.center = new Vector3(centerEyeAnchor.localPosition.x, centerEyeAnchor.localPosition.y / 2, centerEyeAnchor.localPosition.z);
+                Vector3 myMovement = (Vector3.ProjectOnPlane(centerEyeAnchor.forward, Vector3.up).normalized * movement.y) * Time.deltaTime * continuousMovementSpeed;
+                myMovement += (Vector3.ProjectOnPlane(centerEyeAnchor.right, Vector3.up).normalized * movement.x) * Time.deltaTime * continuousMovementSpeed;
+
+                rigidBody.MovePosition(OVRRig.transform.position + myMovement);
+
+                //bodyCollider.height = centerEyeAnchor.position.y;
+                //bodyCollider.center = new Vector3(centerEyeAnchor.localPosition.x, centerEyeAnchor.localPosition.y / 2, centerEyeAnchor.localPosition.z);
             }
             else
             {
