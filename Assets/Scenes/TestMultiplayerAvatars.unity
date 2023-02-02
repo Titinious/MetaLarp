@@ -415,6 +415,7 @@ MonoBehaviour:
   bodyCollider: {fileID: 1664103043}
   rigidBody: {fileID: 1664103042}
   curvedLaser: {fileID: 236646269}
+  useMyMovementMethod: 1
 --- !u!114 &86842877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3689,7 +3690,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.1
-  m_Height: 1.75
+  m_Height: 0.75
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1665075058
