@@ -26,7 +26,7 @@ public class RoleplayAvatar : MyComponent
         {
             Dress();
 
-            if(avatar.characterId == NetworkRunner.GetRunnerForGameObject(gameObject).LocalPlayer.PlayerId)
+            if(avatar.isMe)
             {
                 Object.FindObjectOfType<Locomotion>().StartMove();
             }
@@ -52,7 +52,8 @@ public class RoleplayAvatar : MyComponent
         hat.transform.localPosition = new Vector3(0.12f, 0, 0);
         hat.transform.localEulerAngles = new Vector3(-90, 0, -90);
 
-        hat.layer = LayerMask.NameToLayer("MyIgnore"); // I will ignore my own hat
+        if(avatar.isMe)
+            hat.layer = LayerMask.NameToLayer("MyIgnore"); // I will ignore my own hat
 
 
     }

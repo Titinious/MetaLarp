@@ -23,6 +23,8 @@ namespace Chiligames.MetaAvatarsFusion
 
         public int characterId { get { return networkObject.InputAuthority.PlayerId; } } // which means player order determine character Id
 
+        public bool isMe { get { return this.characterId == NetworkRunner.GetRunnerForGameObject(gameObject).LocalPlayer.PlayerId; } }
+
         protected override void Awake()
         {
         }
