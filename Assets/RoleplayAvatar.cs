@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Fusion;
+using Fusion.Sockets;
 using Chiligames.MetaAvatarsFusion;
 
 public class RoleplayAvatar : MyComponent
@@ -24,6 +25,11 @@ public class RoleplayAvatar : MyComponent
         avatar.OnSkeletonLoadedEvent.AddListener((_) =>
         {
             Dress();
+
+            if(avatar.characterId == NetworkRunner.GetRunnerForGameObject(gameObject).LocalPlayer.PlayerId)
+            {
+                Object.FindObjectOfType<Locomotion>().StartMove();
+            }
         });
     }
 
@@ -45,5 +51,9 @@ public class RoleplayAvatar : MyComponent
         hat = Instantiate(hats[avatar.characterId], headTm);
         hat.transform.localPosition = new Vector3(0.12f, 0, 0);
         hat.transform.localEulerAngles = new Vector3(-90, 0, -90);
+
+        hat.layer = LayerMask.NameToLayer("MyIgnore"); // I will ignore my own hat
+
+
     }
 }
