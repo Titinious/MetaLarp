@@ -155,6 +155,7 @@ namespace Chiligames.MetaAvatarsFusion
         }
         [Header("Testing in editor")]
         [SerializeField] bool testingWithoutCredentials = false;
+        [SerializeField] bool loadByPlayerOrder = false;
         [Tooltip("Filename Postfix (WARNING: Typically the postfix is Platform specific, such as \"_rift.glb\")")]
         [SerializeField] private string _overridePostfix = String.Empty;
         [Tooltip("Adds an underscore between the path and the postfix.")]
@@ -205,7 +206,15 @@ namespace Chiligames.MetaAvatarsFusion
                     assetPostfix = _overridePostfix;
                 }
 
-                path[0] = asset.path + assetPostfix;
+                if (loadByPlayerOrder)
+                {
+                    path[0] = this.GetComponent<NetworkObject>().InputAuthority.PlayerId + assetPostfix; // original
+                }
+                else
+                {
+                    path[0] = asset.path + assetPostfix; // original
+                }
+
                 if (isFromZip)
                 {
                     LoadAssetsFromZipSource(path);
