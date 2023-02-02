@@ -138,6 +138,10 @@ namespace Chiligames.MetaAvatarsFusion
                     yield return null;
                 }
                 avatar = _runner.Spawn(avatarTestPrefab, cameraRig.position, cameraRig.rotation, _runner.LocalPlayer);
+                //avatar.Avatar.OnSkeletonLoadedEvent.AddListener((_) =>
+                //{
+                //    //Debug.Log("Loaded");
+                //});
             }
             else
             {

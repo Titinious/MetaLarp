@@ -6,6 +6,7 @@ namespace Chiligames.MetaAvatarsFusion
     public class AvatarNetworkBehaviour : NetworkBehaviour
     {
         [SerializeField] FusionMetaAvatar avatar;
+        public FusionMetaAvatar Avatar { get { return avatar; } }
 
         //The [Networked] attribute allows us to easily share the state of a variable across the network just by setting it.
         [Networked] public ulong oculusID { get; set; }

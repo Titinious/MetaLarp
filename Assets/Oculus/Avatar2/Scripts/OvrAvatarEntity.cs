@@ -1472,7 +1472,7 @@ namespace Oculus.Avatar2
             return GetSkeletonJoint(idx);
         }
 
-        protected Transform GetSkeletonTransformByType(CAPI.ovrAvatar2JointType jointType)
+        public Transform GetSkeletonTransformByType(CAPI.ovrAvatar2JointType jointType)
         {
             // If joint monitor is disabled due to using Unity Skinning,
             // we can still provide the transform from the entity skeleton hierarchy

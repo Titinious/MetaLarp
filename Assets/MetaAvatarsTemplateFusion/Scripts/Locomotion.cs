@@ -40,7 +40,11 @@ namespace Chiligames.MetaAvatarsFusion
         [SerializeField] private CapsuleCollider bodyCollider;
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] CurvedLaser curvedLaser;
-        
+
+        [SerializeField] OVRInput.Button buttonForMyJump = OVRInput.Button.SecondaryThumbstickDown;
+        [SerializeField] float jumpStrength = 20000;
+
+        [SerializeField] float heightAdjustment = 0.1f;
 
         private bool isMoving;
 
@@ -48,11 +52,12 @@ namespace Chiligames.MetaAvatarsFusion
         {
             rigidBody.isKinematic = true;
             bodyCollider.isTrigger = true;
+
             handTrackingDiamondGesture.OnDiamondPinchGesture.AddListener(Teleport);
         }
 
         void Update()
-        {            
+        {
             if (ContinuousMovementEnabled && OVRInput.IsControllerConnected(OVRInput.Controller.Touch)) //only if controllers detected
             {
                 CheckForContinuousMovement();
@@ -62,6 +67,19 @@ namespace Chiligames.MetaAvatarsFusion
             if (TeleportingEnabled)
             {
                 CheckIfTeleportButton();
+            }
+
+            if (useMyMovementMethod)
+            {
+                // jump
+                if (OVRInput.GetDown(buttonForMyJump, OVRInput.Controller.LTouch))
+                {
+                    rigidBody.AddForce(new Vector3(0, 1, 0) * jumpStrength);
+                }
+
+                // recenter the collider
+                bodyCollider.height = centerEyeAnchor.localPosition.y + heightAdjustment;
+                bodyCollider.center = new Vector3(centerEyeAnchor.localPosition.x, centerEyeAnchor.localPosition.y / 2, centerEyeAnchor.localPosition.z);
             }
         }
 
@@ -105,7 +123,7 @@ namespace Chiligames.MetaAvatarsFusion
         {
             RaycastHit hit;
             Transform startingPoint = null;
-            if(teleportController == OVRInput.Controller.LTouch)
+            if (teleportController == OVRInput.Controller.LTouch)
             {
                 startingPoint = teleportingStartPointControllers[0];
             }
@@ -158,7 +176,7 @@ namespace Chiligames.MetaAvatarsFusion
 
             if (Physics.Raycast(_startPoint, _direction, out hit, 10))
             {
-                if(teleportPoint.enabled == false)
+                if (teleportPoint.enabled == false)
                 {
                     teleportPoint.enabled = true;
                     teleportPoint.transform.position = hit.point;
@@ -205,6 +223,7 @@ namespace Chiligames.MetaAvatarsFusion
                     myMovement += (Vector3.ProjectOnPlane(centerEyeAnchor.right, Vector3.up).normalized * movement.x) * Time.deltaTime * continuousMovementSpeed;
 
                     rigidBody.MovePosition(OVRRig.transform.position + myMovement);
+
                 }
                 else
                 {
@@ -251,16 +270,25 @@ namespace Chiligames.MetaAvatarsFusion
         //enable/disable collider when moving while using continuous movement
         private void CheckForCollider()
         {
-            if (isMoving)
+            if (!useMyMovementMethod)
             {
-                bodyCollider.isTrigger = false;
-                rigidBody.isKinematic = false; ;
+                if (isMoving)
+                {
+                    bodyCollider.isTrigger = false;
+                    rigidBody.isKinematic = false; ;
+                }
+                else
+                {
+                    rigidBody.isKinematic = true;
+                    bodyCollider.isTrigger = true;
+                }
             }
-            else
-            {
-                rigidBody.isKinematic = true;
-                bodyCollider.isTrigger = true;
-            }
+        }
+
+        public void StartMove(){
+            rigidBody.useGravity = true;
+            rigidBody.isKinematic = false;
+            bodyCollider.isTrigger = false;
         }
 
         private void OnDestroy()
