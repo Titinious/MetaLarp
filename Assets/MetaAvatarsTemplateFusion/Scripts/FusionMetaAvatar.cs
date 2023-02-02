@@ -21,6 +21,8 @@ namespace Chiligames.MetaAvatarsFusion
         private bool skeletonLoaded = false;
         public AvatarNetworkBehaviour networkBehaviour;
 
+        public int characterId { get { return networkObject.InputAuthority.PlayerId; } } // which means player order determine character Id
+
         protected override void Awake()
         {
         }
@@ -87,6 +89,7 @@ namespace Chiligames.MetaAvatarsFusion
         {
             base.OnSkeletonLoaded();
             skeletonLoaded = true;
+
         }
 
         //If the skeleton is already loaded, we can start streaming the avatar state every "_intervalToSendData" seconds
@@ -208,7 +211,7 @@ namespace Chiligames.MetaAvatarsFusion
 
                 if (loadByPlayerOrder)
                 {
-                    path[0] = this.GetComponent<NetworkObject>().InputAuthority.PlayerId + assetPostfix; // original
+                    path[0] = characterId + assetPostfix; // original
                 }
                 else
                 {

@@ -7,6 +7,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7877161175676733928, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+      propertyPath: avatar
+      value: 
+      objectReference: {fileID: 1130773805918489735}
+    - target: {fileID: -7877161175676733928, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+      propertyPath: hats.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7877161175676733928, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+      propertyPath: hats.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: a0dfaf0497ab5334a99165f16b697e6e, type: 3}
+    - target: {fileID: -7877161175676733928, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+      propertyPath: hats.Array.data[1]
+      value: 
+      objectReference: {fileID: 100000, guid: 06c4131835f65024586454416f6b1f66, type: 3}
+    - target: {fileID: -7877161175676733928, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+      propertyPath: hats.Array.data[2]
+      value: 
+      objectReference: {fileID: 100000, guid: a9853556c4fc4d44087cd153918f7305, type: 3}
     - target: {fileID: 660564439421668917, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: m_Name
       value: MyFusionAvatarFromZip Variant
@@ -56,24 +76,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
-      propertyPath: loadByPlayerOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
-      propertyPath: _assets.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
-      propertyPath: testingWithoutCredentials
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
-      propertyPath: _assets.Array.data[0].path
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
-      propertyPath: _assets.Array.data[1].path
-      value: 1
+      propertyPath: _activeView
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8337681765717695180, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
       propertyPath: NetworkGuid.RawGuidValue.Array.data[0]
@@ -85,3 +89,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+--- !u!114 &1130773805918489735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 660564439421668919, guid: 25306936c578ca442bf630a3b3f3afb6, type: 3}
+  m_PrefabInstance: {fileID: 476144689744790192}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36532f07331c347418983a6797f7b5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
