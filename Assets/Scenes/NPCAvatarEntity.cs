@@ -110,6 +110,8 @@ public class NPCAvatarEntity : OvrAvatarEntity
     protected bool playOnAwake = true;
     [SerializeField]
     protected bool loopMotionRecording = true;
+    [SerializeField]
+    protected Vector2Int recordingRange = new Vector2Int(0, int.MaxValue);
 
     protected bool HasLocalAvatarConfigured => _assets.Count > 0;
 
@@ -132,9 +134,13 @@ public class NPCAvatarEntity : OvrAvatarEntity
         //if(!isRecordingNPC)
         //    _creationInfo.features = CAPI.ovrAvatar2EntityFeatures.Preset_Remote;
 
-        motionRecording = File.ReadAllBytes(Path.Combine(Application.dataPath, "NPCMotionRecordings", recordName + ".dat"));
+        try
+        {
+            motionRecording = File.ReadAllBytes(Path.Combine(Application.dataPath, "NPCMotionRecordings", recordName + ".dat"));
+        }
+        catch (Exception _) { };
 
-        if (playOnAwake)
+        if (playOnAwake && !isRecordingNPC)
         {
             this.OnSkeletonLoadedEvent.AddListener((_) =>
             {
@@ -185,12 +191,13 @@ public class NPCAvatarEntity : OvrAvatarEntity
 
         //UnityEngine.Debug.Log("frameCnt:" + frameCnt);
 
-
         do
         {
+            Vector2Int _recordingRange = recordingRange;
+
             this.SetStreamingPlayback(true);
 
-            for (int i = 0; i < frameCnt; i++)
+            for (int i = _recordingRange.x; i < frameCnt && i <= _recordingRange.y; i++)
             {
                 //UnityEngine.Debug.Log("i:" + i);
 
@@ -207,7 +214,7 @@ public class NPCAvatarEntity : OvrAvatarEntity
         }
         while (loopMotionRecording);
 
-
+        playRecordingCo = null;
         //UnityEngine.Debug.Log("Done");
         //this.SetStreamingPlayback(false);
     }
@@ -217,7 +224,14 @@ public class NPCAvatarEntity : OvrAvatarEntity
         if (recording == null)
             recording = motionRecording;
 
-        if (playRecordingCo != null) StopCoroutine(playRecordingCo);
+        int frameCnt = recording.Length / snapshotLength;
+        UnityEngine.Debug.Log(string.Format("Recording {0} with {1} Frames", recordName, frameCnt));
+
+        if (playRecordingCo != null)
+        {
+            StopCoroutine(playRecordingCo);
+            this.SetStreamingPlayback(false);
+        }
 
         playRecordingCo = StartCoroutine(PlayingRecording(recording));
 
@@ -233,7 +247,7 @@ public class NPCAvatarEntity : OvrAvatarEntity
                 byte[] recording = File.ReadAllBytes(Path.Combine(Application.dataPath, "NPCMotionRecordings", recordName + ".dat"));
                 //UnityEngine.Debug.Log("Reading recording: " + recording.Length);
 
-                this.PlayRecording();
+                this.PlayRecording(recording);
                 //UnityEngine.Debug.Log(snapshot.Length);
             }
         }
