@@ -1542,7 +1542,7 @@ MonoBehaviour:
   recordName: idle
   playOnAwake: 0
   loopMotionRecording: 1
-  recordingRange: {x: 50, y: 510}
+  recordingRange: {x: 40, y: 500}
   shaderGrayToSolidColorBlend_: 0.7
   shaderDesatBlend_: 0
   shaderSolidColor_: {r: 0.12941177, g: 0.19607843, b: 0.3882353, a: 0}
