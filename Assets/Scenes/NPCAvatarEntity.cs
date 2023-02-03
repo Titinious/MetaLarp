@@ -146,9 +146,13 @@ public class NPCAvatarEntity : OvrAvatarEntity
         {
             this.OnSkeletonLoadedEvent.AddListener((_) =>
             {
-                //if(randomJoinTime)
-                    
-                this.PlayRecording();
+                if (randomJoinTime)
+                {
+                    LeanTween.delayedCall(UnityEngine.Random.Range(0f, 1f) * 3f, () =>
+                    {
+                        this.PlayRecording();
+                    });
+                }
             });
         }
 
