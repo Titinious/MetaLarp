@@ -112,6 +112,8 @@ public class NPCAvatarEntity : OvrAvatarEntity
     protected bool loopMotionRecording = true;
     [SerializeField]
     protected Vector2Int recordingRange = new Vector2Int(0, int.MaxValue);
+    [SerializeField]
+    protected bool randomJoinTime = false;
 
     protected bool HasLocalAvatarConfigured => _assets.Count > 0;
 
@@ -144,6 +146,8 @@ public class NPCAvatarEntity : OvrAvatarEntity
         {
             this.OnSkeletonLoadedEvent.AddListener((_) =>
             {
+                //if(randomJoinTime)
+                    
                 this.PlayRecording();
             });
         }
