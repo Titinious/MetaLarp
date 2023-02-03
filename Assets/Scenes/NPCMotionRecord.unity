@@ -880,7 +880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715179094}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -985,7 +985,9 @@ MonoBehaviour:
   _debugDrawGazePosColor: {r: 1, g: 0, b: 1, a: 1}
   _overrideStreamLod: 0
   isRecordingNPC: 0
-  recordName: npc_recording
+  recordName: wave
+  playOnAwake: 0
+  loopMotionRecording: 0
   shaderGrayToSolidColorBlend_: 0.7
   shaderDesatBlend_: 0
   shaderSolidColor_: {r: 0.12941177, g: 0.19607843, b: 0.3882353, a: 0}
@@ -1470,7 +1472,9 @@ MonoBehaviour:
   _debugDrawGazePosColor: {r: 1, g: 0, b: 1, a: 1}
   _overrideStreamLod: 0
   isRecordingNPC: 1
-  recordName: npc_recording
+  recordName: wave
+  playOnAwake: 1
+  loopMotionRecording: 1
   shaderGrayToSolidColorBlend_: 0.7
   shaderDesatBlend_: 0
   shaderSolidColor_: {r: 0.12941177, g: 0.19607843, b: 0.3882353, a: 0}

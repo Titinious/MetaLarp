@@ -106,6 +106,10 @@ public class NPCAvatarEntity : OvrAvatarEntity
     protected bool isRecordingNPC = false;
     [SerializeField]
     protected string recordName = "npc_recording";
+    [SerializeField]
+    protected bool playOnAwake = true;
+    [SerializeField]
+    protected bool loopMotionRecording = true;
 
     protected bool HasLocalAvatarConfigured => _assets.Count > 0;
 
@@ -128,11 +132,22 @@ public class NPCAvatarEntity : OvrAvatarEntity
         //if(!isRecordingNPC)
         //    _creationInfo.features = CAPI.ovrAvatar2EntityFeatures.Preset_Remote;
 
+        motionRecording = File.ReadAllBytes(Path.Combine(Application.dataPath, "NPCMotionRecordings", recordName + ".dat"));
+
+        if (playOnAwake)
+        {
+            this.OnSkeletonLoadedEvent.AddListener((_) =>
+            {
+                this.PlayRecording();
+            });
+        }
+
     }
 
     bool isRecording = false;
 
     List<byte[]> recording;
+    byte[] motionRecording;
 
     int snapshotLength = 724; // assume using StreamLOD.Medium
 
@@ -144,7 +159,7 @@ public class NPCAvatarEntity : OvrAvatarEntity
             if (isRecording) // save recording
             {
                 UnityEngine.Debug.Log(recording[0].Length);
-                File.WriteAllBytes(Path.Combine(Application.dataPath, recordName + ".dat"), recording.SelectMany(x => x).ToArray());
+                File.WriteAllBytes(Path.Combine(Application.dataPath, "NPCMotionRecordings", recordName + ".dat"), recording.SelectMany(x => x).ToArray());
             }
             else
             {
@@ -161,37 +176,67 @@ public class NPCAvatarEntity : OvrAvatarEntity
         }
     }
 
-    IEnumerator PlayRecording(byte[] recording)
+    Coroutine playRecordingCo;
+    IEnumerator PlayingRecording(byte[] recording)
     {
         int frameCnt = recording.Length / snapshotLength;
 
         byte[] snapshot = new byte[snapshotLength];
 
-        for (int i=0; i<frameCnt; i++)
+        //UnityEngine.Debug.Log("frameCnt:" + frameCnt);
+
+
+        do
         {
-            Span<byte> snapshotSpan = new Span<byte>(snapshot, 0, snapshotLength);
-            Span<byte> frameSpan = new Span<byte>(recording, snapshotLength * i, snapshotLength);
-            frameSpan.CopyTo(snapshotSpan);
+            this.SetStreamingPlayback(true);
 
-            this.ApplyStreamData(snapshot);
+            for (int i = 0; i < frameCnt; i++)
+            {
+                //UnityEngine.Debug.Log("i:" + i);
 
-            yield return null;
+                Span<byte> snapshotSpan = new Span<byte>(snapshot, 0, snapshotLength);
+                Span<byte> frameSpan = new Span<byte>(recording, snapshotLength * i, snapshotLength);
+                frameSpan.CopyTo(snapshotSpan);
+
+                this.ApplyStreamData(snapshot);
+
+                yield return null;
+            }
+
+            this.SetStreamingPlayback(false);
         }
+        while (loopMotionRecording);
+
+
+        //UnityEngine.Debug.Log("Done");
+        //this.SetStreamingPlayback(false);
     }
 
+    public void PlayRecording(byte[] recording = null)
+    {
+        if (recording == null)
+            recording = motionRecording;
+
+        if (playRecordingCo != null) StopCoroutine(playRecordingCo);
+
+        playRecordingCo = StartCoroutine(PlayingRecording(recording));
+
+    }
 
     protected void Update()
     {
         if (isRecordingNPC) Update_RecordNPC();
         else
+        {
             if (Input.GetKeyDown(KeyCode.P))
             {
-                byte[] recording = File.ReadAllBytes(Path.Combine(Application.dataPath, recordName + ".dat"));
+                byte[] recording = File.ReadAllBytes(Path.Combine(Application.dataPath, "NPCMotionRecordings", recordName + ".dat"));
+                //UnityEngine.Debug.Log("Reading recording: " + recording.Length);
 
-                StartCoroutine(PlayRecording(recording));
-
+                this.PlayRecording();
                 //UnityEngine.Debug.Log(snapshot.Length);
             }
+        }
 
     }
 
