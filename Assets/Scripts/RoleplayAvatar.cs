@@ -4,15 +4,16 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using Chiligames.MetaAvatarsFusion;
+using Oculus.Avatar2;
 
 public class RoleplayAvatar : MyComponent
 {
     // Start is called before the first frame update
     [SerializeField]
-    FusionMetaAvatar avatar;
+    OvrAvatarEntity avatar;
 
     [SerializeField]
-    GameObject[] hats;
+    GameObject[] hats; // for player, hat is the player order. For NPC, hat is always the first hat
 
     GameObject hat;
 
@@ -26,9 +27,13 @@ public class RoleplayAvatar : MyComponent
         {
             Dress();
 
-            if(avatar.isMe)
+            if (avatar is FusionMetaAvatar)
             {
-                Object.FindObjectOfType<Locomotion>().StartMove();
+                FusionMetaAvatar _avatar = (FusionMetaAvatar) avatar;
+                if (_avatar.isMe)
+                {
+                    Object.FindObjectOfType<Locomotion>().StartMove();
+                }
             }
         });
     }
@@ -48,13 +53,23 @@ public class RoleplayAvatar : MyComponent
 
         Transform headTm = avatar.GetSkeletonTransformByType(Oculus.Avatar2.CAPI.ovrAvatar2JointType.Head);
 
-        hat = Instantiate(hats[avatar.characterId], headTm);
-        hat.transform.localPosition = new Vector3(0.12f, 0, 0);
-        hat.transform.localEulerAngles = new Vector3(-90, 0, -90);
+        if(avatar is FusionMetaAvatar)
+        {
+            FusionMetaAvatar _avatar = (FusionMetaAvatar)avatar;
 
-        if(avatar.isMe)
-            hat.layer = LayerMask.NameToLayer("MyIgnore"); // I will ignore my own hat
+            hat = Instantiate(hats[_avatar.characterId], headTm);
+            hat.transform.localPosition = new Vector3(0.12f, 0, 0);
+            hat.transform.localEulerAngles = new Vector3(-90, 0, -90);
 
+            if (_avatar.isMe)
+                hat.layer = LayerMask.NameToLayer("MyIgnore"); // I will ignore my own hat
+        }
+        else if(avatar is NPCAvatarEntity)
+        {
+            hat = Instantiate(hats[0], headTm); 
+            //hat.transform.localPosition = new Vector3(0.12f, 0, 0);
+            hat.transform.localEulerAngles = new Vector3(-90, 0, -90);
+        }
 
     }
 }

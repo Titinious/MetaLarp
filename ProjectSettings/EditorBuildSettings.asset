@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Main.unity
-    guid: 8442d7151b2d5b94a81e7a4486e2a23f
+    path: Assets/Scenes/MetaverseHub.unity
+    guid: 0f111c808e0e5bd43953124b1ec019ef
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 047edf7fe99fe1e468b469eb89ec2775, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: da657cb48951f564c8981510f9cd7b14, type: 2}

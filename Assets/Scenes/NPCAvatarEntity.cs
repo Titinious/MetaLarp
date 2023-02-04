@@ -165,7 +165,6 @@ public class NPCAvatarEntity : OvrAvatarEntity
 
     int snapshotLength = 724; // assume using StreamLOD.Medium
 
-
     protected void Update_RecordNPC()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -408,7 +407,13 @@ public class NPCAvatarEntity : OvrAvatarEntity
                 assetPostfix = _overridePostfix;
             }
 
-            path[0] = asset.path + assetPostfix;
+            string assetPath = asset.path;
+            if (assetPath == "-1")
+            {
+                assetPath = UnityEngine.Random.Range(0, 31).ToString();
+            }
+
+            path[0] = assetPath + assetPostfix;
             if (isFromZip)
             {
                 LoadAssetsFromZipSource(path);
