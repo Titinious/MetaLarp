@@ -153,6 +153,10 @@ public class NPCAvatarEntity : OvrAvatarEntity
                         this.PlayRecording();
                     });
                 }
+                else
+                {
+                    this.PlayRecording();
+                }
             });
         }
 
